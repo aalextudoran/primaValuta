@@ -3,6 +3,8 @@ interface LogoProps {
   theme?: "dark" | "light";
 }
 
+const FONT = '"Arial Black", Impact, "Franklin Gothic Heavy", sans-serif';
+
 export function Logo({ variant = "navbar" }: LogoProps) {
   if (variant === "hero") {
     return (
@@ -16,7 +18,7 @@ export function Logo({ variant = "navbar" }: LogoProps) {
         <text
           x="0"
           y="52"
-          fontFamily="'Arial Black', Impact, 'Franklin Gothic Heavy', sans-serif"
+          fontFamily={FONT}
           fontSize="52"
           fontWeight="900"
           letterSpacing="-1"
@@ -27,7 +29,7 @@ export function Logo({ variant = "navbar" }: LogoProps) {
         <text
           x="170"
           y="52"
-          fontFamily="'Arial Black', Impact, 'Franklin Gothic Heavy', sans-serif"
+          fontFamily={FONT}
           fontSize="52"
           fontWeight="900"
           letterSpacing="-1"
@@ -45,31 +47,22 @@ export function Logo({ variant = "navbar" }: LogoProps) {
     );
   }
 
-  // navbar + footer — same mark, different sizes handled by SVG viewBox
+  // navbar + footer — HTML so the two words are always flush regardless of font fallback
   return (
-    <svg width="220" height="28" viewBox="0 0 220 28" xmlns="http://www.w3.org/2000/svg" aria-label="Prima Valuta">
-      <text
-        x="0"
-        y="22"
-        fontFamily="'Arial Black', Impact, 'Franklin Gothic Heavy', sans-serif"
-        fontSize="24"
-        fontWeight="900"
-        letterSpacing="-0.5"
-        fill="#0a2d6e"
-      >
-        PRIMA
-      </text>
-      <text
-        x="86"
-        y="22"
-        fontFamily="'Arial Black', Impact, 'Franklin Gothic Heavy', sans-serif"
-        fontSize="24"
-        fontWeight="900"
-        letterSpacing="-0.5"
-        fill="#C8121E"
-      >
-        VALUTA
-      </text>
-    </svg>
+    <span
+      aria-label="Prima Valuta"
+      style={{
+        display: "flex",
+        alignItems: "baseline",
+        fontFamily: FONT,
+        fontSize: 24,
+        fontWeight: 900,
+        lineHeight: 1,
+        letterSpacing: "-0.5px",
+      }}
+    >
+      <span style={{ color: "#0a2d6e" }}>PRIMA</span>
+      <span style={{ color: "#C8121E" }}>VALUTA</span>
+    </span>
   );
 }

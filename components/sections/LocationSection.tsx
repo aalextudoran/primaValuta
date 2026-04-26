@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { siteConfig } from "@/lib/site-config";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { LazyMap } from "@/components/ui/LazyMap";
 
 export function LocationSection() {
   return <LocationSectionContent lang="ro" />;
@@ -31,15 +32,7 @@ export function LocationSectionContent({ lang = "ro" }: { lang?: "ro" | "en" }) 
           <div className="grid items-start gap-5 md:grid-cols-[60fr_40fr]">
 
             {/* ── Left: Map ── */}
-            <div className="overflow-hidden rounded-xl">
-              <iframe
-                title="Prima Valuta Craiova"
-                src={mapSrc}
-                className="h-[420px] w-full"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
+            <LazyMap src={mapSrc} title="Prima Valuta Craiova" />
 
             {/* ── Right: photo + address + CTA ── */}
             <div className="flex flex-col gap-4">

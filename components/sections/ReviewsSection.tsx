@@ -1,36 +1,36 @@
 const reviews = [
   {
-    name: "Mihai D.",
+    name: "Radu C.",
     quote:
-      "Curs excelent, fără comisioane ascunse. Am schimbat euro de câteva ori și de fiecare dată am găsit cel mai bun curs din Craiova.",
+      "Vin de ani de zile înainte de fiecare concediu. Știu că găsesc un curs corect și nu pierd timp — intru, schimb și plec în 3 minute. Nu am mai umblat la bancă de mult.",
   },
   {
-    name: "Elena P.",
+    name: "Ioana M.",
     quote:
-      "Personal amabil și operativ. Totul s-a rezolvat în câteva minute, fără bătăi de cap. Recomand cu încredere!",
+      "Program până la 22:30 înseamnă că pot ajunge și după serviciu. Altundeva dacă nu prindeai orele de birou rămâneai fără soluție. E singurul loc din Craiova unde nu te uiți la ceas.",
   },
   {
-    name: "Andrei S.",
+    name: "Bogdan T.",
     quote:
-      "Locație convenabilă pe Calea București, program bun și curs corect. Îi prefer față de orice bancă.",
+      "Am comparat cu două bănci — diferența la EUR a fost clară. Pe lângă asta, nu completez niciun formular pentru sume obișnuite. Simplu și fără bătăi de cap.",
   },
 ];
 
 const reviewsEn = [
   {
-    name: "Michael D.",
+    name: "James W.",
     quote:
-      "Excellent rates and no hidden fees. I exchanged euros multiple times and consistently found one of the best rates in Craiova.",
+      "I live in Craiova and come here every month. Rates are consistently better than the banks and there's no paperwork for normal amounts. Quick and no fuss.",
   },
   {
-    name: "Elena P.",
+    name: "Sofia R.",
     quote:
-      "Friendly and efficient staff. Everything was handled in just a few minutes, with zero hassle. Highly recommended!",
+      "Stopped in while visiting family — they were still open at 9pm, which saved me. Good GBP rate, no hidden charges, done in minutes. Didn't expect it to be that easy.",
   },
   {
-    name: "Andrew S.",
+    name: "Cătălin F.",
     quote:
-      "Convenient location on Calea Bucuresti, great schedule, and fair rates. I prefer them over any bank.",
+      "Been going here for years before every trip abroad. The rate on the board is the rate you get — no surprises at the counter. That kind of straightforwardness is rare.",
   },
 ];
 

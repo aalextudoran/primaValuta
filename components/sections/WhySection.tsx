@@ -29,46 +29,46 @@ const HeartIcon = () => (
 const benefits = [
   {
     icon: <EyeIcon />,
-    title: "Transparență totală",
-    text: "Cursurile sunt afișate clar la intrare și pe site. Niciun cost ascuns, nicio surpriză la final — prețul pe care îl vezi este prețul pe care îl plătești.",
+    title: "Cursul pe care îl vezi e cel real",
+    text: "Afișăm cursurile pe panoul de la intrare și pe site. Nu există taxă de schimb, comision de procesare sau adaosuri. Dai exact cât scrie — fără surprize la casă.",
   },
   {
     icon: <BoltIcon />,
-    title: "Tranzacții rapide",
-    text: "Fiecare schimb durează câteva minute. Nu vei pierde timp la coadă sau cu formulare complicate. Respectăm timpul tău.",
+    title: "Intri, schimbi, pleci",
+    text: "Pentru sume obișnuite nu completezi niciun formular. Tranzacția durează 2–3 minute. Suntem deschiși zilnic 08:00–22:30, inclusiv weekend și sărbători legale.",
   },
   {
     icon: <ShieldIcon />,
     title: "Autorizat BNR din 2013",
-    text: "Operăm conform reglementărilor Băncii Naționale a României. Toate tranzacțiile sunt legale, documentate și în siguranță deplină.",
+    text: "Avem autorizația Băncii Naționale a României și operăm conform legislației în vigoare. Fiecare tranzacție este înregistrată și documentată legal — nu există zonă gri.",
   },
   {
     icon: <HeartIcon />,
-    title: "Serviciu local, pentru Craiova",
-    text: "Suntem din Craiova, pentru Craiova. Cunoaștem nevoile comunității noastre și construim relații pe termen lung cu clienții noștri.",
+    title: "O casă de schimb locală, nu o sucursală",
+    text: "Mulți clienți vin la noi de ani de zile — înainte de concediu, după salariu, ori de câte ori au nevoie de valută rapid. Îți cunoaștem fața și îți respectăm timpul.",
   },
 ];
 
 const benefitsEn = [
   {
     icon: <EyeIcon />,
-    title: "Total transparency",
-    text: "Rates are displayed clearly at the office and on the website. No hidden costs and no surprises at the counter.",
+    title: "The rate you see is what you pay",
+    text: "Rates are displayed on the board at the entrance and on the website. No exchange fee, no processing charge, no markup. You pay exactly what's shown — no surprises at the counter.",
   },
   {
     icon: <BoltIcon />,
-    title: "Fast transactions",
-    text: "Each exchange takes only a few minutes. No waiting lines and no complicated paperwork.",
+    title: "In and out in minutes",
+    text: "No forms for standard amounts. Each transaction takes 2–3 minutes. Open every day 08:00–22:30, including weekends and public holidays.",
   },
   {
     icon: <ShieldIcon />,
     title: "BNR authorized since 2013",
-    text: "We operate under National Bank of Romania regulations. Every transaction is legal, documented, and secure.",
+    text: "We hold a National Bank of Romania authorization and operate within full legal compliance. Every transaction is recorded and documented — no grey areas.",
   },
   {
     icon: <HeartIcon />,
-    title: "Local service for Craiova",
-    text: "We are from Craiova, for Craiova. We understand local needs and build long-term relationships with customers.",
+    title: "A local exchange, not a chain",
+    text: "Many of our customers have been coming for years — before a holiday, after payday, whenever they need currency fast. We know our regulars and we respect their time.",
   },
 ];
 
@@ -78,8 +78,8 @@ export function WhySection({ lang = "ro" }: { lang?: "ro" | "en" }) {
   const titlePrefix = lang === "ro" ? "De ce" : "Why";
   const subtitle =
     lang === "ro"
-      ? "Peste 10 ani de experiență în schimb valutar, cu mii de clienți mulțumiți din Craiova și împrejurimi."
-      : "Over 10 years of exchange experience, with thousands of satisfied customers in Craiova and nearby areas.";
+      ? "Din 2013 în Craiova — un loc în care cursul afișat este cursul real, fără surprize și fără timp pierdut."
+      : "In Craiova since 2013 — a place where the displayed rate is the real rate, no surprises and no wasted time.";
   return (
     <section className="border-y border-line/70 bg-pv-navy-50/55">
       <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-24">
@@ -89,9 +89,7 @@ export function WhySection({ lang = "ro" }: { lang?: "ro" | "en" }) {
             <h2 className="text-3xl font-semibold text-foreground md:text-4xl">
               {titlePrefix} <span className="text-pv-red-600">Prima Valuta</span>?
             </h2>
-            <p className="max-w-xl text-base text-muted-foreground">
-              {subtitle}
-            </p>
+            <p className="max-w-xl text-base text-muted-foreground">{subtitle}</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
