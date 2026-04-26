@@ -11,7 +11,7 @@ import { WhySection } from "@/components/sections/WhySection";
 export const metadata: Metadata = {
   title: "Currency Exchange Craiova | Prima Valuta — EUR, USD, GBP, CHF, CAD, AUD, NOK, DKK, SEK",
   description:
-    "Authorized currency exchange in Craiova, Romania. Daily updated EUR, USD, GBP, CHF, CAD, AUD, NOK, DKK, SEK rates. No hidden fees. Open 7 days, 08:00–22:30. Calea București - Frații Golești nr. 2, Bloc M18, Bradu.",
+    "Authorized currency exchange in Craiova, Romania. Daily updated EUR, USD, GBP, CHF, CAD, AUD, NOK, DKK, SEK rates. No hidden fees. Open 7 days, 08:00–22:30. Calea București 68, Bloc R2, Craiova, 200516.",
   keywords: [
     "currency exchange craiova",
     "exchange rates craiova romania",

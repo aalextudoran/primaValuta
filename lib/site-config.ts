@@ -8,10 +8,10 @@ export const siteConfig = {
   city: "Craiova",
   heroTitle: "Schimb valutar in Craiova",
   heroSubtitle: "Cursuri actualizate zilnic. Fara comisioane ascunse.",
-  localReference: "Calea București - Frații Golești nr. 2, Bloc M18, Bradu",
+  localReference: "Calea București 68, Bloc R2, Craiova",
   mapsUrl: "https://maps.app.goo.gl/rSbqo8qVRxq5vnUi7",
   mapsEmbedUrl: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1074.057128324767!2d23.80678765545219!3d44.318322950793565!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4752d709fa83babf%3A0xcb9b0c9784915eb2!2sPrima%20Valuta!5e0!3m2!1sen!2sus!4v1777216773958!5m2!1sen!2sus",
-  address: "Calea București - Frații Golești nr. 2, Bloc M18, Bradu, Craiova",
+  address: "Calea București 68, Bloc R2, Craiova, 200516",
   postalCode: "",
   registeredAddress: "Str. Sfinții Apostoli nr. 10, Craiova 200392, jud. Dolj",
   schedule: [

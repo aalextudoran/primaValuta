@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import type { RatesPayload } from "@/lib/rates-types";
 
-const STALE_MS = 24 * 60 * 60 * 1000;
-
 function parseUpdatedAt(value: string): Date | null {
   const [datePart, timePart] = value.split(" ");
   if (!datePart || !timePart) return null;
@@ -45,10 +43,12 @@ export function StaleBanner({ lang = "ro" }: { lang?: "ro" | "en" }) {
         const res = await fetch("/api/rates", { cache: "no-store" });
         if (!res.ok) return;
         const data = (await res.json()) as RatesPayload;
+        const [datePart] = data.updated_at.split(" ");
+        const todayStr = new Date().toISOString().slice(0, 10);
+        if (datePart === todayStr) return;
         const date = parseUpdatedAt(data.updated_at);
         if (!date) return;
-        const diff = Date.now() - date.getTime();
-        if (diff > STALE_MS) setAgeMs(diff);
+        setAgeMs(Date.now() - date.getTime());
       } catch {
         // ignore fetch errors
       }

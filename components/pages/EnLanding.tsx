@@ -236,13 +236,13 @@ function EnTrustBar() {
 
 // ── Rates section ─────────────────────────────────────────────────────────────
 
-function EnRatesSection({ ratesData, error, lastLoadedAt }: { ratesData: RatesPayload | null; error: string | null; lastLoadedAt: number }) {
+function EnRatesSection({ ratesData, error }: { ratesData: RatesPayload | null; error: string | null }) {
   const isStale = useMemo(() => {
     if (!ratesData) return false;
-    const date = parseUpdatedAt(ratesData.updated_at);
-    if (!date) return false;
-    return lastLoadedAt - date.getTime() > 24 * 60 * 60 * 1000;
-  }, [ratesData, lastLoadedAt]);
+    const [datePart] = ratesData.updated_at.split(" ");
+    const todayStr = new Date().toISOString().slice(0, 10);
+    return datePart !== todayStr;
+  }, [ratesData]);
 
   const updatedLabel = useMemo(() => {
     if (!ratesData) return null;
@@ -284,7 +284,7 @@ function EnRatesSection({ ratesData, error, lastLoadedAt }: { ratesData: RatesPa
                       <td className="px-4 py-4 text-base font-bold text-pv-navy-800 md:px-6">{rate.currency}</td>
                       <td className="px-4 py-4 text-base font-semibold text-green-600 md:px-6">{rate.buy.toFixed(2)}</td>
                       <td className="px-4 py-4 text-base font-semibold text-pv-navy-400 md:px-6">{rate.sell.toFixed(2)}</td>
-                      <td className="px-4 py-4 text-xs text-muted-foreground md:px-6">+{(rate.sell - rate.buy).toFixed(2)}</td>
+                      <td className="px-4 py-4 text-xs text-muted-foreground md:px-6">{(() => { const s = rate.sell - rate.buy; return s < 0 || s > 2 ? "—" : `+${s.toFixed(2)}`; })()}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -416,7 +416,7 @@ function EnWhySection() {
 
 function EnLocationSection() {
   const mapSrc = siteConfig.mapsEmbedUrl.startsWith("TODO_")
-    ? "https://www.google.com/maps?q=Calea+Fratii+Golesti+nr+2+Bloc+M18+Craiova&output=embed"
+    ? "https://www.google.com/maps?q=Calea+Bucuresti+68+Bloc+R2+Craiova&output=embed"
     : siteConfig.mapsEmbedUrl;
 
   return (
@@ -451,9 +451,8 @@ function EnLocationSection() {
                     </svg>
                     <div>
                       <p className="text-sm font-semibold text-pv-navy-800">
-                        Calea București - Frații Golești nr. 2, Bloc M18
+                        {siteConfig.address}
                       </p>
-                      <p className="text-xs text-muted-foreground">Bradu, Craiova, Romania</p>
                     </div>
                   </div>
 
@@ -507,7 +506,7 @@ function EnLocationSection() {
 // ── Root ──────────────────────────────────────────────────────────────────────
 
 export function EnLanding() {
-  const { ratesData, error, lastLoadedAt } = useRates();
+  const { ratesData, error } = useRates();
 
   return (
     <div className="min-h-screen bg-background">
@@ -515,7 +514,7 @@ export function EnLanding() {
       <main>
         <EnHero ratesData={ratesData} />
         <EnTrustBar />
-        <EnRatesSection ratesData={ratesData} error={error} lastLoadedAt={lastLoadedAt} />
+        <EnRatesSection ratesData={ratesData} error={error} />
         <EnReviewsSection />
         <EnWhySection />
         <EnLocationSection />

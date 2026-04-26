@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { RatesPayload } from "@/lib/rates-types";
 
 const REFRESH_INTERVAL_MS = 60_000;
@@ -29,6 +29,12 @@ function formatUpdatedLabel(updatedAt: string, lang: "ro" | "en"): string {
   return lang === "ro" ? `Actualizat azi la ${hours}:${minutes}` : `Updated today at ${hours}:${minutes}`;
 }
 
+function formatSpread(buy: number, sell: number): string {
+  const spread = sell - buy;
+  if (spread < 0 || spread > 2) return "—";
+  return `+${spread.toFixed(2)}`;
+}
+
 const copy = {
   ro: {
     invalidResponse: "Răspuns invalid de la server.",
@@ -38,7 +44,6 @@ const copy = {
     currency: "Valuta",
     buy: "Cumpărăm",
     sell: "Vindem",
-    stale: "Curs neactualizat — verificați la sediu",
     lastRefreshError: "Ultima eroare la refresh",
   },
   en: {
@@ -49,7 +54,6 @@ const copy = {
     currency: "Currency",
     buy: "We buy",
     sell: "We sell",
-    stale: "Rates may be outdated — please verify at the office",
     lastRefreshError: "Last refresh error",
   },
 } as const;
@@ -58,7 +62,6 @@ export function RatesTable({ lang = "ro" }: { lang?: "ro" | "en" }) {
   const t = copy[lang];
   const [data, setData] = useState<RatesPayload | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [lastLoadedAt, setLastLoadedAt] = useState<number>(0);
 
   const loadRates = useCallback(async () => {
     try {
@@ -70,7 +73,6 @@ export function RatesTable({ lang = "ro" }: { lang?: "ro" | "en" }) {
       const payload = (await response.json()) as RatesPayload;
       setData(payload);
       setError(null);
-      setLastLoadedAt(Date.now());
     } catch (loadError) {
       setError(loadError instanceof Error ? loadError.message : t.unknownError);
     }
@@ -86,19 +88,6 @@ export function RatesTable({ lang = "ro" }: { lang?: "ro" | "en" }) {
       window.clearInterval(interval);
     };
   }, [loadRates]);
-
-  const isStale = useMemo(() => {
-    if (!data) {
-      return false;
-    }
-
-    const date = parseUpdatedAt(data.updated_at);
-    if (!date) {
-      return false;
-    }
-
-    return lastLoadedAt - date.getTime() > 24 * 60 * 60 * 1000;
-  }, [data, lastLoadedAt]);
 
   if (!data) {
     return (
@@ -125,13 +114,13 @@ export function RatesTable({ lang = "ro" }: { lang?: "ro" | "en" }) {
               <tr key={rate.currency} className="border-b border-line/70 last:border-none">
                 <td className="px-4 py-4 text-base font-bold text-pv-navy-800 md:px-6">{rate.currency}</td>
                 <td className="px-4 py-4 text-base font-semibold text-green-600 md:px-6">
-                  {rate.buy.toFixed(2)}
+                  {parseFloat(rate.buy.toString()).toFixed(2)}
                 </td>
                 <td className="px-4 py-4 text-base font-semibold text-pv-navy-400 md:px-6">
-                  {rate.sell.toFixed(2)}
+                  {parseFloat(rate.sell.toString()).toFixed(2)}
                 </td>
                 <td className="px-4 py-4 text-xs text-muted-foreground md:px-6">
-                  +{(rate.sell - rate.buy).toFixed(2)}
+                  {formatSpread(rate.buy, rate.sell)}
                 </td>
               </tr>
             ))}
@@ -146,12 +135,6 @@ export function RatesTable({ lang = "ro" }: { lang?: "ro" | "en" }) {
         </span>
         <span>{formatUpdatedLabel(data.updated_at, lang)}</span>
       </div>
-
-      {isStale ? (
-        <p className="rounded-md border border-orange-200 bg-orange-50 px-3 py-2 text-sm text-orange-700">
-          {t.stale}
-        </p>
-      ) : null}
 
       {error ? <p className="text-xs text-orange-700">{t.lastRefreshError}: {error}</p> : null}
     </div>

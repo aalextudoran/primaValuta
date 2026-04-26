@@ -12,14 +12,13 @@ export function LocationSectionContent({ lang = "ro" }: { lang?: "ro" | "en" }) 
   const idLocation = isRo ? "locatie" : "location";
   const idHours = isRo ? "program" : "hours";
   const title = isRo ? "Locație și program" : "Location and hours";
-  const addressLine = isRo ? "Calea București - Frații Golești nr. 2, Bloc M18" : "Calea Bucuresti - Fratii Golesti no. 2, Bloc M18";
-  const areaLine = isRo ? "Bradu, Craiova" : "Bradu, Craiova";
+  const addressLine = siteConfig.address;
   const days = isRo ? "Luni – Duminică" : "Monday – Sunday";
   const openMaps = isRo ? "Deschide în Maps" : "Open in Maps";
 
   const mapSrc =
     siteConfig.mapsEmbedUrl.startsWith("TODO_")
-      ? "https://www.google.com/maps?q=Calea+Fratii+Golesti+nr+2+Bloc+M18+Craiova&output=embed"
+      ? "https://www.google.com/maps?q=Calea+Bucuresti+68+Bloc+R2+Craiova&output=embed"
       : siteConfig.mapsEmbedUrl;
 
   return (
@@ -48,9 +47,6 @@ export function LocationSectionContent({ lang = "ro" }: { lang?: "ro" | "en" }) 
                     <div>
                       <p className="text-sm font-semibold text-pv-navy-800">
                         {addressLine}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {areaLine}
                       </p>
                     </div>
                   </div>
