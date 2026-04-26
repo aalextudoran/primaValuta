@@ -30,21 +30,14 @@ function formatAge(ms: number, lang: "ro" | "en"): string {
 }
 
 const copy = {
-  ro: {
-    label: "Atenție:",
-    message: (age: string) =>
-      `Cursurile valutare nu au mai fost actualizate de ${age}. Valorile afișate sunt orientative — verificați la sediu pentru cursurile actuale.`,
-  },
-  en: {
-    label: "Notice:",
-    message: (age: string) =>
-      `Exchange rates haven't been updated for ${age}. Displayed values are indicative only — please verify at the office for current rates.`,
-  },
+  ro: (age: string) =>
+    `Curs neactualizat de mai mult de ${age} — valorile afișate sunt orientative, verificați la sediu.`,
+  en: (age: string) =>
+    `Rates not updated for more than ${age} — displayed values are indicative, please verify at the office.`,
 } as const;
 
 export function StaleBanner({ lang = "ro" }: { lang?: "ro" | "en" }) {
   const [ageMs, setAgeMs] = useState<number | null>(null);
-  const t = copy[lang];
 
   useEffect(() => {
     (async () => {
@@ -65,25 +58,20 @@ export function StaleBanner({ lang = "ro" }: { lang?: "ro" | "en" }) {
   if (ageMs === null) return null;
 
   return (
-    <div className="border-b border-orange-200 bg-orange-50 py-3">
-      <div className="mx-auto flex w-full max-w-6xl items-start gap-3 px-6">
-        <svg
-          viewBox="0 0 20 20"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          className="mt-0.5 h-4 w-4 shrink-0 text-orange-500"
-          aria-hidden="true"
-        >
-          <path d="M10 2.5 L18.5 17.5 H1.5 Z" strokeLinejoin="round" />
-          <path d="M10 8 V12.5" strokeLinecap="round" />
-          <circle cx="10" cy="15" r="0.75" fill="currentColor" stroke="none" />
-        </svg>
-        <p className="text-sm text-orange-800">
-          <span className="font-semibold">{t.label}</span>{" "}
-          {t.message(formatAge(ageMs, lang))}
-        </p>
-      </div>
+    <div className="flex items-start gap-2.5 rounded-xl border border-orange-200 bg-orange-50 px-4 py-3">
+      <svg
+        viewBox="0 0 20 20"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        className="mt-0.5 h-4 w-4 shrink-0 text-orange-500"
+        aria-hidden="true"
+      >
+        <path d="M10 2.5 L18.5 17.5 H1.5 Z" strokeLinejoin="round" />
+        <path d="M10 8 V12.5" strokeLinecap="round" />
+        <circle cx="10" cy="15" r="0.75" fill="currentColor" stroke="none" />
+      </svg>
+      <p className="text-sm text-orange-800">{copy[lang](formatAge(ageMs, lang))}</p>
     </div>
   );
 }

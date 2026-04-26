@@ -7,7 +7,6 @@ import { RatesSection } from "@/components/sections/RatesSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { TrustBarSection } from "@/components/sections/TrustBarSection";
 import { WhySection } from "@/components/sections/WhySection";
-import { StaleBanner } from "@/components/ui/StaleBanner";
 
 export const metadata: Metadata = {
   title: "Currency Exchange Craiova | Prima Valuta — EUR, USD, GBP, CHF, CAD, AUD, NOK, DKK, SEK",
@@ -51,7 +50,6 @@ export default function EnPage() {
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader lang="en" />
-      <StaleBanner lang="en" />
       <main>
         <HeroSection lang="en" />
         <TrustBarSection lang="en" />

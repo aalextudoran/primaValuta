@@ -3,6 +3,7 @@
 import { siteConfig } from "@/lib/site-config";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { RatesTable } from "@/components/sections/RatesTable";
+import { StaleBanner } from "@/components/ui/StaleBanner";
 
 const copy = {
   ro: {
@@ -29,6 +30,7 @@ export function RatesSection({ lang = "ro" }: { lang?: "ro" | "en" }) {
             {t.title} <span className="text-pv-red-600">{t.accent}</span>
           </h2>
         </div>
+        <StaleBanner lang={lang} />
         <RatesTable lang={lang} />
         <p className="text-sm text-muted-foreground">{t.note}</p>
       </ScrollReveal>
