@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f5f7fb;
+  --surface: #ffffff;
+  --foreground: #0d1f3c;
+  --muted-foreground: #4b6280;
+  --line: #cfdae8;
+
+  --pv-navy-950: #060f1e;
+  --pv-navy-900: #0a1628;
+  --pv-navy-800: #0d1f3c;
+  --pv-navy-600: #1a3a5c;
+  --pv-navy-400: #2a5a8a;
+  --pv-navy-200: #8aafd4;
+  --pv-navy-50: #eef3f9;
+
+  --pv-red-700: #9e0e16;
+  --pv-red-600: #c8121e;
+  --pv-red-100: #fdeaea;
+  --pv-yellow: #f5c200;
+  --pv-blue-mid: #1560bd;
+  --pv-text-on-dark: #ffffff;
+  --pv-text-muted-dark: #8aafd4;
+  --pv-text-body: #0d1f3c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-brand-blue: var(--pv-blue-mid);
+  --color-brand-green: var(--pv-navy-600);
+  --color-brand-gold: var(--pv-yellow);
+  --color-line: var(--line);
+  --color-pv-navy-950: var(--pv-navy-950);
+  --color-pv-navy-900: var(--pv-navy-900);
+  --color-pv-navy-800: var(--pv-navy-800);
+  --color-pv-navy-600: var(--pv-navy-600);
+  --color-pv-navy-400: var(--pv-navy-400);
+  --color-pv-navy-200: var(--pv-navy-200);
+  --color-pv-navy-50: var(--pv-navy-50);
+  --color-pv-red-700: var(--pv-red-700);
+  --color-pv-red-600: var(--pv-red-600);
+  --color-pv-red-100: var(--pv-red-100);
+  --color-pv-yellow: var(--pv-yellow);
+  --color-pv-blue-mid: var(--pv-blue-mid);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-playfair);
+  --font-brand: "Arial Black", Impact, "Franklin Gothic Heavy", sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--pv-blue-mid) 30%, white);
+}

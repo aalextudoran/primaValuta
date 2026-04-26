@@ -1,0 +1,51 @@
+{
+  "updated_at": "2026-04-26 17:51",
+  "published_by": "admin",
+  "rates": [
+    {
+      "currency": "EUR",
+      "buy": 1004.9992,
+      "sell": 5.15
+    },
+    {
+      "currency": "USD",
+      "buy": 4.56,
+      "sell": 4.67
+    },
+    {
+      "currency": "GBP",
+      "buy": 5.79,
+      "sell": 5.94
+    },
+    {
+      "currency": "CHF",
+      "buy": 5.18,
+      "sell": 5.34
+    },
+    {
+      "currency": "CAD",
+      "buy": 3.25,
+      "sell": 3.38
+    },
+    {
+      "currency": "AUD",
+      "buy": 2.9,
+      "sell": 3.02
+    },
+    {
+      "currency": "NOK",
+      "buy": 0.1552,
+      "sell": 0.45
+    },
+    {
+      "currency": "DKK",
+      "buy": 0.65,
+      "sell": 0.7
+    },
+    {
+      "currency": "SEK",
+      "buy": 0.43,
+      "sell": 0.47
+    }
+  ]
+}

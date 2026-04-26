@@ -1,0 +1,159 @@
+"use client";
+
+import { useCallback, useEffect, useMemo, useState } from "react";
+import type { RatesPayload } from "@/lib/rates-types";
+
+const REFRESH_INTERVAL_MS = 60_000;
+
+function parseUpdatedAt(value: string): Date | null {
+  const [datePart, timePart] = value.split(" ");
+  if (!datePart || !timePart) {
+    return null;
+  }
+
+  const [year, month, day] = datePart.split("-").map(Number);
+  const [hours, minutes] = timePart.split(":").map(Number);
+  const date = new Date(year, (month || 1) - 1, day || 1, hours || 0, minutes || 0);
+
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function formatUpdatedLabel(updatedAt: string, lang: "ro" | "en"): string {
+  const date = parseUpdatedAt(updatedAt);
+  if (!date) {
+    return lang === "ro" ? `Actualizat la ${updatedAt}` : `Updated at ${updatedAt}`;
+  }
+
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return lang === "ro" ? `Actualizat azi la ${hours}:${minutes}` : `Updated today at ${hours}:${minutes}`;
+}
+
+const copy = {
+  ro: {
+    invalidResponse: "Răspuns invalid de la server.",
+    unknownError: "Eroare necunoscută.",
+    cannotLoad: "Nu putem încărca cursurile",
+    loading: "Încărcăm cursurile...",
+    currency: "Valuta",
+    buy: "Cumpărăm",
+    sell: "Vindem",
+    stale: "Curs neactualizat — verificați la sediu",
+    lastRefreshError: "Ultima eroare la refresh",
+  },
+  en: {
+    invalidResponse: "Invalid response from server.",
+    unknownError: "Unknown error.",
+    cannotLoad: "Unable to load rates",
+    loading: "Loading rates...",
+    currency: "Currency",
+    buy: "We buy",
+    sell: "We sell",
+    stale: "Rates may be outdated — please verify at the office",
+    lastRefreshError: "Last refresh error",
+  },
+} as const;
+
+export function RatesTable({ lang = "ro" }: { lang?: "ro" | "en" }) {
+  const t = copy[lang];
+  const [data, setData] = useState<RatesPayload | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [lastLoadedAt, setLastLoadedAt] = useState<number>(0);
+
+  const loadRates = useCallback(async () => {
+    try {
+      const response = await fetch("/api/rates", { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error(t.invalidResponse);
+      }
+
+      const payload = (await response.json()) as RatesPayload;
+      setData(payload);
+      setError(null);
+      setLastLoadedAt(Date.now());
+    } catch (loadError) {
+      setError(loadError instanceof Error ? loadError.message : t.unknownError);
+    }
+  }, [t.invalidResponse, t.unknownError]);
+
+  useEffect(() => {
+    const initialTimeout = window.setTimeout(() => {
+      void loadRates();
+    }, 0);
+    const interval = window.setInterval(loadRates, REFRESH_INTERVAL_MS);
+    return () => {
+      window.clearTimeout(initialTimeout);
+      window.clearInterval(interval);
+    };
+  }, [loadRates]);
+
+  const isStale = useMemo(() => {
+    if (!data) {
+      return false;
+    }
+
+    const date = parseUpdatedAt(data.updated_at);
+    if (!date) {
+      return false;
+    }
+
+    return lastLoadedAt - date.getTime() > 24 * 60 * 60 * 1000;
+  }, [data, lastLoadedAt]);
+
+  if (!data) {
+    return (
+      <div className="rounded-2xl border border-line bg-surface p-6 text-sm text-muted-foreground">
+        {error ? `${t.cannotLoad}: ${error}` : t.loading}
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-3">
+      <div className="overflow-x-auto rounded-2xl border border-line bg-surface shadow-[0_18px_45px_-35px_rgba(15,34,57,0.35)]">
+        <table className="w-full min-w-[360px] border-collapse">
+          <thead>
+            <tr className="border-b border-line bg-pv-navy-50 text-left text-xs uppercase tracking-wide text-muted-foreground">
+              <th className="px-4 py-3 text-sm font-semibold text-pv-blue-mid md:px-6">{t.currency}</th>
+              <th className="px-4 py-3 text-sm font-semibold text-pv-blue-mid md:px-6">{t.buy}</th>
+              <th className="px-4 py-3 text-sm font-semibold text-pv-blue-mid md:px-6">{t.sell}</th>
+              <th className="px-4 py-3 text-sm font-semibold text-muted-foreground md:px-6">Spread</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.rates.map((rate) => (
+              <tr key={rate.currency} className="border-b border-line/70 last:border-none">
+                <td className="px-4 py-4 text-base font-bold text-pv-navy-800 md:px-6">{rate.currency}</td>
+                <td className="px-4 py-4 text-base font-semibold text-green-600 md:px-6">
+                  {rate.buy.toFixed(2)}
+                </td>
+                <td className="px-4 py-4 text-base font-semibold text-pv-navy-400 md:px-6">
+                  {rate.sell.toFixed(2)}
+                </td>
+                <td className="px-4 py-4 text-xs text-muted-foreground md:px-6">
+                  +{(rate.sell - rate.buy).toFixed(2)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+        <span className="relative inline-flex h-2.5 w-2.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-60" />
+          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
+        </span>
+        <span>{formatUpdatedLabel(data.updated_at, lang)}</span>
+      </div>
+
+      {isStale ? (
+        <p className="rounded-md border border-orange-200 bg-orange-50 px-3 py-2 text-sm text-orange-700">
+          {t.stale}
+        </p>
+      ) : null}
+
+      {error ? <p className="text-xs text-orange-700">{t.lastRefreshError}: {error}</p> : null}
+    </div>
+  );
+}
