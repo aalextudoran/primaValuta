@@ -72,20 +72,20 @@ export function HeroSection({ lang = "ro" }: HeroSectionProps) {
   const rateHint = direction === "buy" ? t.sellRateHint : t.buyRateHint;
 
   return (
-    <section className="relative flex min-h-[600px] items-end overflow-hidden pb-10 pt-6">
+    <section className="relative flex min-h-[600px] items-end overflow-hidden bg-pv-navy-800 pb-10 pt-6">
       {/* Background photo */}
       <Image
         src="/image4.png"
         alt=""
         fill
-        className="object-cover"
+        className="hidden object-cover md:block"
         style={{ objectPosition: "center 35%" }}
         priority
       />
 
       {/* Overlay */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 hidden md:block"
         style={{ background: "rgba(8,20,45,0.72)", backdropFilter: "blur(3px)" }}
       />
 
