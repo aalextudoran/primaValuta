@@ -88,6 +88,10 @@ export function SiteFooter({ lang = "ro" }: { lang?: "ro" | "en" }) {
             </Link>
           </div>
         </div>
+
+        <p className="mt-4 text-center text-xs text-muted-foreground/60">
+         DEVSOFT - 2026
+        </p>
       </div>
     </footer>
   );

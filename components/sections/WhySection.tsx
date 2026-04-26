@@ -29,46 +29,46 @@ const HeartIcon = () => (
 const benefits = [
   {
     icon: <EyeIcon />,
-    title: "Cursul pe care îl vezi e cel real",
-    text: "Afișăm cursurile pe panoul de la intrare și pe site. Nu există taxă de schimb, comision de procesare sau adaosuri. Dai exact cât scrie — fără surprize la casă.",
+    title: "Curs real",
+    text: "Cursul afișat e cel pe care îl primești. Niciun comision, nicio surpriză.",
   },
   {
     icon: <BoltIcon />,
-    title: "Intri, schimbi, pleci",
-    text: "Pentru sume obișnuite nu completezi niciun formular. Tranzacția durează 2–3 minute. Suntem deschiși zilnic 08:00–22:30, inclusiv weekend și sărbători legale.",
+    title: "2-3 minute",
+    text: "Nu completezi formulare. Intri, schimbi și pleci în câteva minute.",
   },
   {
     icon: <ShieldIcon />,
-    title: "Autorizat BNR din 2013",
-    text: "Avem autorizația Băncii Naționale a României și operăm conform legislației în vigoare. Fiecare tranzacție este înregistrată și documentată legal — nu există zonă gri.",
+    title: "Din 2013",
+    text: "Autorizați BNR, cu experiență dovedită pe piața din Craiova.",
   },
   {
     icon: <HeartIcon />,
-    title: "O casă de schimb locală, nu o sucursală",
-    text: "Mulți clienți vin la noi de ani de zile — înainte de concediu, după salariu, ori de câte ori au nevoie de valută rapid. Îți cunoaștem fața și îți respectăm timpul.",
+    title: "100% local",
+    text: "O casă de schimb locală, nu o sucursală. Te cunoaștem.",
   },
 ];
 
 const benefitsEn = [
   {
     icon: <EyeIcon />,
-    title: "The rate you see is what you pay",
-    text: "Rates are displayed on the board at the entrance and on the website. No exchange fee, no processing charge, no markup. You pay exactly what's shown — no surprises at the counter.",
+    title: "Real rate",
+    text: "The posted rate is what you get. No fees, no surprises.",
   },
   {
     icon: <BoltIcon />,
-    title: "In and out in minutes",
-    text: "No forms for standard amounts. Each transaction takes 2–3 minutes. Open every day 08:00–22:30, including weekends and public holidays.",
+    title: "2-3 minutes",
+    text: "No paperwork for standard amounts. In and out in minutes.",
   },
   {
     icon: <ShieldIcon />,
-    title: "BNR authorized since 2013",
-    text: "We hold a National Bank of Romania authorization and operate within full legal compliance. Every transaction is recorded and documented — no grey areas.",
+    title: "Since 2013",
+    text: "BNR-authorized with a proven track record in Craiova.",
   },
   {
     icon: <HeartIcon />,
-    title: "A local exchange, not a chain",
-    text: "Many of our customers have been coming for years — before a holiday, after payday, whenever they need currency fast. We know our regulars and we respect their time.",
+    title: "100% local",
+    text: "A local exchange, not a chain. We know our customers.",
   },
 ];
 
@@ -80,10 +80,11 @@ export function WhySection({ lang = "ro" }: { lang?: "ro" | "en" }) {
     lang === "ro"
       ? "Din 2013 în Craiova — un loc în care cursul afișat este cursul real, fără surprize și fără timp pierdut."
       : "In Craiova since 2013 — a place where the displayed rate is the real rate, no surprises and no wasted time.";
+
   return (
-    <section className="border-y border-line/70 bg-pv-navy-50/55">
-      <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-24">
-        <ScrollReveal className="space-y-10">
+    <section className="bg-white">
+      <div className="mx-auto w-full max-w-6xl px-6 py-20">
+        <ScrollReveal className="space-y-12">
           <div className="space-y-3">
             <p className="text-xs font-bold uppercase tracking-widest text-pv-red-600">{pretitle}</p>
             <h2 className="text-3xl font-semibold text-foreground md:text-4xl">
@@ -92,17 +93,19 @@ export function WhySection({ lang = "ro" }: { lang?: "ro" | "en" }) {
             <p className="max-w-xl text-base text-muted-foreground">{subtitle}</p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {data.map((benefit) => (
-              <div
-                key={benefit.title}
-                className="group rounded-2xl border border-line bg-white p-6 shadow-sm transition hover:border-pv-red-600/30 hover:shadow-md"
-              >
-                <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-pv-red-600/10 text-pv-red-600 transition group-hover:bg-pv-red-600 group-hover:text-white">
+              <div key={benefit.title} className="flex flex-col items-center gap-4 text-center">
+                <div
+                  className="flex h-12 w-12 items-center justify-center rounded-full text-white"
+                  style={{ backgroundColor: "#CC0000" }}
+                >
                   {benefit.icon}
                 </div>
-                <h3 className="mb-2 text-base font-bold text-pv-navy-800">{benefit.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{benefit.text}</p>
+                <h3 className="text-[15px] font-bold" style={{ color: "#0D1B2A" }}>
+                  {benefit.title}
+                </h3>
+                <p className="line-clamp-2 text-[12px] leading-relaxed text-muted-foreground">{benefit.text}</p>
               </div>
             ))}
           </div>
