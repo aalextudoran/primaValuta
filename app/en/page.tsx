@@ -38,13 +38,11 @@ export const metadata: Metadata = {
     locale: "en_GB",
     alternateLocale: "ro_RO",
     type: "website",
-    images: ["/image1.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Prima Valuta — Currency Exchange Craiova",
     description: "Daily updated EUR, USD, GBP, CHF rates. No fees. BNR authorized.",
-    images: ["/image1.png"],
   },
 };
 
