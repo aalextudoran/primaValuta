@@ -83,7 +83,7 @@ export function WhySection({ lang = "ro" }: { lang?: "ro" | "en" }) {
 
   return (
     <section className="bg-white">
-      <div className="mx-auto w-full max-w-6xl px-6 py-20">
+      <div className="mx-auto w-full max-w-6xl px-6 py-10 md:py-14">
         <ScrollReveal className="space-y-12">
           <div className="space-y-3">
             <p className="text-xs font-bold uppercase tracking-widest text-pv-red-600">{pretitle}</p>

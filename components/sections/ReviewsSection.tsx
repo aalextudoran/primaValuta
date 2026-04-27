@@ -46,7 +46,7 @@ export function ReviewsSection({ lang = "ro" }: { lang?: "ro" | "en" }) {
   const verified = lang === "ro" ? "Client verificat" : "Verified client";
 
   return (
-    <section style={{ backgroundColor: "#F8F9FA" }} className="py-20">
+    <section style={{ backgroundColor: "#F8F9FA" }} className="py-10 md:py-14">
       <div className="mx-auto w-full max-w-6xl px-6">
         <h2 className="mb-8 text-2xl font-semibold text-pv-navy-800 md:text-3xl">{title}</h2>
         <div className="grid gap-6 md:grid-cols-3">

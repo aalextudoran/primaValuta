@@ -23,7 +23,7 @@ export function LocationSectionContent({ lang = "ro" }: { lang?: "ro" | "en" }) 
 
   return (
     <section id={idLocation} className="bg-white">
-      <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-24">
+      <div className="mx-auto w-full max-w-6xl px-6 py-10 md:py-14">
         <ScrollReveal className="space-y-8">
           <h2 className="text-3xl font-semibold text-foreground md:text-4xl">{title}</h2>
 

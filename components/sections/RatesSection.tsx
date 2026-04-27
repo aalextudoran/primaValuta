@@ -23,7 +23,7 @@ const copy = {
 export function RatesSection({ lang = "ro" }: { lang?: "ro" | "en" }) {
   const t = copy[lang];
   return (
-    <section id={t.id} className="mx-auto w-full max-w-6xl px-6 py-20 md:py-24">
+    <section id={t.id} className="mx-auto w-full max-w-6xl px-6 py-10 md:py-14">
       <ScrollReveal className="space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-3xl font-semibold text-foreground md:text-4xl">
