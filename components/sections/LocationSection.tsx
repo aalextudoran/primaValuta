@@ -18,7 +18,7 @@ export function LocationSectionContent({ lang = "ro" }: { lang?: "ro" | "en" }) 
 
   const mapSrc =
     siteConfig.mapsEmbedUrl.startsWith("TODO_")
-      ? "https://www.google.com/maps?q=Calea+Bucuresti+68+Bloc+R2+Craiova&output=embed"
+      ? "https://www.google.com/maps?q=Calea+Bucuresti+Fratii+Golesti+nr+2+Bloc+M18B+Craiova&output=embed"
       : siteConfig.mapsEmbedUrl;
 
   return (

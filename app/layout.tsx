@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://primavaluta.ro"),
   title: "Schimb Valutar Craiova | Prima Valuta — EUR, USD, GBP, CHF fără comisioane",
   description:
-    "Casă de schimb valutar autorizată BNR în Craiova. Curs EUR, USD, GBP, CHF actualizat zilnic, fără comisioane ascunse. Calea București 68, Bloc R2, Craiova, 200516 — Zilnic 08:00–22:30.",
+    "Casă de schimb valutar autorizată BNR în Craiova. Curs EUR, USD, GBP, CHF actualizat zilnic, fără comisioane ascunse. Calea București Frații Golești nr. 2, Bloc M 18 B, Craiova — Zilnic 08:00–22:30.",
   keywords: [
     "schimb valutar craiova",
     "curs valutar craiova",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Prima Valuta — Schimb Valutar Craiova fără comisioane",
     description:
-      "Curs EUR, USD, GBP, CHF actualizat zilnic. Autorizat BNR din 2013. Rapid, sigur, fără comisioane ascunse. Calea București 68, Bloc R2, Craiova, 200516.",
+      "Curs EUR, USD, GBP, CHF actualizat zilnic. Autorizat BNR din 2013. Rapid, sigur, fără comisioane ascunse. Calea București Frații Golești nr. 2, Bloc M 18 B, Craiova.",
     locale: "ro_RO",
     alternateLocale: "en_GB",
     type: "website",
@@ -69,11 +69,11 @@ export default function RootLayout({
     name: "Prima Valuta",
     description: "Casa de schimb valutar in Craiova. Cursuri EUR, USD, GBP, CHF actualizate zilnic.",
     url: "https://primavaluta.ro",
-    telephone: "+40773392419",
+    telephone: "(0351) 407 322",
     email: "contact@primavaluta.ro",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Calea București 68, Bloc R2",
+      streetAddress: "Calea București Frații Golești nr. 2, Bloc M 18 B",
       addressLocality: "Craiova",
       addressRegion: "Dolj",
       postalCode: "200516",
