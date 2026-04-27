@@ -65,18 +65,22 @@ async function readFromKv(): Promise<RatesPayload | null> {
     throw new Error(`KV read failed with status ${response.status}`);
   }
 
-  const json = (await response.json()) as { result: RatesPayload | null };
-  return json.result ? normalizeRates(json.result) : null;
+  // Upstash returns the value as a JSON string in result, not a parsed object.
+  const json = (await response.json()) as { result: string | null };
+  if (!json.result) return null;
+  return normalizeRates(JSON.parse(json.result) as RatesPayload);
 }
 
 async function writeToKv(payload: RatesPayload): Promise<void> {
   const { url, token } = getKvCredentials();
-  const encodedValue = encodeURIComponent(JSON.stringify(normalizeRates(payload)));
-  const response = await fetch(`${url}/set/${encodeURIComponent(KV_KEY)}/${encodedValue}`, {
+  // Use pipeline with body to avoid URL-length limits and encoding issues.
+  const response = await fetch(`${url}/pipeline`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     },
+    body: JSON.stringify([["SET", KV_KEY, JSON.stringify(normalizeRates(payload))]]),
     cache: "no-store",
   });
 
