@@ -1,11 +1,5 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  experimental: {
-    outputFileTracingIncludes: {
-      "/api/rates": ["./data/**/*"],
-    },
-  },
-};
+const nextConfig: NextConfig = {};
 
 export default nextConfig;
