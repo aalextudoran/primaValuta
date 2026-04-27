@@ -96,8 +96,23 @@ export async function getRates(): Promise<RatesPayload> {
     return kvData;
   }
 
-  const fallback = await readFromFile();
-  await writeToKv(fallback);
+  // KV is empty — seed it from the bundled file (first deploy).
+  // If the file is also unavailable, throw a clear error rather than crashing opaquely.
+  let fallback: RatesPayload;
+  try {
+    fallback = await readFromFile();
+  } catch {
+    throw new Error(
+      "KV store is empty and fallback rates file is not available. Deploy with outputFileTracingIncludes or seed KV manually."
+    );
+  }
+
+  try {
+    await writeToKv(fallback);
+  } catch {
+    // Non-fatal: return the file data even if the KV seed write fails.
+  }
+
   return fallback;
 }
 
