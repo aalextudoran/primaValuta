@@ -71,7 +71,7 @@ export function ReviewsSection({ lang = "ro" }: { lang?: "ro" | "en" }) {
               <p className="mb-3" style={{ color: "#F59E0B", fontSize: "18px", letterSpacing: "3px" }}>
                 ★★★★★
               </p>
-              <p className="line-clamp-3 text-[13px] leading-relaxed text-pv-navy-800">{review.quote}</p>
+              <p className="text-[13px] leading-relaxed text-pv-navy-800">{review.quote}</p>
             </article>
           ))}
         </div>

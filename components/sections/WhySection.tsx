@@ -105,7 +105,7 @@ export function WhySection({ lang = "ro" }: { lang?: "ro" | "en" }) {
                 <h3 className="text-[15px] font-bold" style={{ color: "#0D1B2A" }}>
                   {benefit.title}
                 </h3>
-                <p className="line-clamp-2 text-[12px] leading-relaxed text-muted-foreground">{benefit.text}</p>
+                <p className="text-[12px] leading-relaxed text-muted-foreground">{benefit.text}</p>
               </div>
             ))}
           </div>
