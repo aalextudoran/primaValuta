@@ -29,13 +29,10 @@ function formatUpdatedLabel(updatedAt: string, lang: "ro" | "en"): string {
   return lang === "ro" ? `Actualizat azi la ${hours}:${minutes}` : `Updated today at ${hours}:${minutes}`;
 }
 
-function formatRate(value: number): string {
-  return value < 1 ? value.toFixed(4) : value.toFixed(2);
-}
 
 function formatSpread(buy: number, sell: number): string {
   const spread = sell - buy;
-  if (spread < 0 || spread > 2) return "—";
+  if (spread < 0) return "—";
   return `+${spread.toFixed(2)}`;
 }
 
@@ -118,10 +115,10 @@ export function RatesTable({ lang = "ro" }: { lang?: "ro" | "en" }) {
               <tr key={rate.currency} className="border-b border-line/70 last:border-none">
                 <td className="px-4 py-4 text-base font-bold text-pv-navy-800 md:px-6">{rate.currency}</td>
                 <td className="px-4 py-4 text-base font-semibold text-green-600 md:px-6">
-                  {formatRate(rate.buy)}
+                  {String(rate.buy)}
                 </td>
                 <td className="px-4 py-4 text-base font-semibold text-pv-navy-400 md:px-6">
-                  {formatRate(rate.sell)}
+                  {String(rate.sell)}
                 </td>
                 <td className="px-4 py-4 text-xs text-muted-foreground md:px-6">
                   {formatSpread(rate.buy, rate.sell)}
