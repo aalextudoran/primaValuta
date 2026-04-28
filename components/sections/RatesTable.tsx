@@ -26,7 +26,33 @@ function formatUpdatedLabel(updatedAt: string, lang: "ro" | "en"): string {
 
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
-  return lang === "ro" ? `Actualizat azi la ${hours}:${minutes}` : `Updated today at ${hours}:${minutes}`;
+
+  const now = new Date();
+  const isToday =
+    date.getFullYear() === now.getFullYear() &&
+    date.getMonth() === now.getMonth() &&
+    date.getDate() === now.getDate();
+
+  if (isToday) {
+    return lang === "ro" ? `Actualizat azi la ${hours}:${minutes}` : `Updated today at ${hours}:${minutes}`;
+  }
+
+  const yesterday = new Date(now);
+  yesterday.setDate(now.getDate() - 1);
+  const isYesterday =
+    date.getFullYear() === yesterday.getFullYear() &&
+    date.getMonth() === yesterday.getMonth() &&
+    date.getDate() === yesterday.getDate();
+
+  if (isYesterday) {
+    return lang === "ro" ? `Actualizat ieri la ${hours}:${minutes}` : `Updated yesterday at ${hours}:${minutes}`;
+  }
+
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  return lang === "ro"
+    ? `Actualizat pe ${day}.${month} la ${hours}:${minutes}`
+    : `Updated on ${day}.${month} at ${hours}:${minutes}`;
 }
 
 
